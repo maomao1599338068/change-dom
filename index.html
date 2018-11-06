@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const product=[
+            {pname:'飘柔',price:188,desc:'顺顺滑滑，用了都说好'},
+            {pname:'清扬',price:199,desc:'比海飞丝飘逸，比飘柔要柔'},
+            {pname:'海飞丝',price:188,desc:'比飘柔要顺，比清扬要滑'},
+        ]
+        //字符串转为真实dom对象，并且return 出去
+        function parseDom(domStr) {
+            let html = document.createElement('div');
+            html.innerHTML = domStr.join('');
+           return html;
+        }
+        
+        //将转换好的dom添加到app节点或者body中，写出判断如果有app节点就添加进去，没有就添加到body中
+            function app(dom){
+                let appelement = document.getElementsByTagName('div')[0];;
+                let body = document.getElementsByTagName('body')[0];
+                if(appelement) {
+                    let app = appelement;
+                    appelement.innerHTML = dom;
+                } else {
+                    body.appendChild (dom);
+                }
+            }
+            class Component{
+                constructor(data){
+                    this.data = data;
+                    this.render();
+                }
+                 //将this.data遍历然后返回字符串
+                render(){
+                  const str = this.data.map(item => {
+                      return `<div>
+                        <h3>
+                            ${item.pname}
+                            <b>${item.price}</b>
+                        </h3>
+                        <p>${item.desc}</p>
+                      </div>`
+                  })
+                const html = parseDom(str);
+                //   //调用app函数并且传入 render函数的返回值，实现组件的渲染
+                 app(html); 
+                }
+            }
+            new Component(product);
+           
+        
+          
+            
+
+
+
+
+
+            
+    </script>
+</body>
+</html>
